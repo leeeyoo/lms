@@ -66,7 +66,7 @@ export const ChaptersForm = ({
   return (
     <div className="mt-6 bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Course chapter
+        Course chapters
         <Button onClick={toggleCreating} variant="ghost">
           {isCreating ? (
             <>Cancel</>
@@ -78,14 +78,6 @@ export const ChaptersForm = ({
           )}
         </Button>
       </div>
-      {!isCreating && (
-        <p className={cn(
-          "text-sm mt-2",
-          !initialData.description && "text-slate-500 italic"
-        )}>
-          {initialData.description || "No description"}
-        </p>
-      )}
       {isCreating && (
         <Form {...form}>
           <form
@@ -100,7 +92,7 @@ export const ChaptersForm = ({
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="e.g. 'This course is about...'"
+                      placeholder="e.g. 'Introduction to the course'"
                       {...field}
                     />
                   </FormControl>
@@ -108,16 +100,24 @@ export const ChaptersForm = ({
                 </FormItem>
               )}
             />
-            <div className="flex items-center gap-x-2">
-              <Button
-                disabled={!isValid || isSubmitting}
-                type="submit"
-              >
-                Save
-              </Button>
-            </div>
+            <Button
+              disabled={!isValid || isSubmitting}
+              type="submit"
+            >
+              Create
+            </Button>
           </form>
         </Form>
+      )}
+      {!isCreating && (
+        <div>
+          No chapters
+        </div>
+      )}
+      {!isCreating && (
+        <p className="text-xs text-muted-foreground mt-4">
+          Drag and drop to reorder the chapters
+        </p>
       )}
     </div>
   )
