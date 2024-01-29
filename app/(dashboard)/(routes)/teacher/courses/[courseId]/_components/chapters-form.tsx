@@ -8,7 +8,7 @@ import { Pencil, PlusCircle } from "lucide-react"
 import { useState } from "react"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation"
-import { Course } from "@prisma/client"
+import { Chapter, Course } from "@prisma/client"
 
 import {
   Form,
@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
 
 interface ChaptersFormProps {
-  initialData: Course
+  initialData: Course & { chapters: Chapter[]}
   courseId: string
 }
 
@@ -110,8 +110,12 @@ export const ChaptersForm = ({
         </Form>
       )}
       {!isCreating && (
-        <div>
-          No chapters
+        <div className={cn(
+          "text-sm mt-2",
+          !initialData.chapters.length && "text-slate-500 italic"
+        )}>
+          {!initialData.chapters.length && "No chapters"}
+          {/* TODO: Add a list of chapters */}
         </div>
       )}
       {!isCreating && (
