@@ -1,6 +1,15 @@
 "use client";
 
 import { Chapter } from "@prisma/client";
+import { useEffect, useState } from "react";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "@hello-pangea/dnd";
+
+import { cn } from "@/lib/utils";
 
 interface ChapterListProps {
   items: Chapter[];
@@ -9,5 +18,24 @@ interface ChapterListProps {
 }
 
 export const ChapterList = ({ items, onReorder, onEdit }: ChapterListProps) => {
-  return <div>Chapters List</div>;
+  const [isMounted, setIsMounted] = useState(false);
+  const [chapter, setChapter] = useState(items);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    setChapter(items);
+  }, [items]);
+
+  if (!isMounted) {
+    return null;
+  }
+
+  return (
+    <div>
+      <div></div>
+    </div>
+  );
 };
